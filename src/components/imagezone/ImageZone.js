@@ -5,6 +5,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { Grid } from '@material-ui/core';
+import Example from './Example';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -47,7 +48,8 @@ export default function ImageZone() {
                     </Grid>   
                 </Grid> 
                 )
-                    : null
+                :
+                (<Example />)
             }
         </div>
     );

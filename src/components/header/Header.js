@@ -11,7 +11,7 @@ import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
 import LayersIcon from '@material-ui/icons/Layers';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import Brightness7Icon from '@material-ui/icons/Brightness7';
-import { toggleinst,toggledisp,toggleTheme } from '../../global/Reducer';
+import { toggleinst,toggledisp,toggleTheme,unload } from '../../global/Reducer';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
   menuButton: {
     marginRight: theme.spacing(2),
+    zIndex: theme.zIndex.drawer + 2,
   },
   title: {
     flexGrow: 1,
@@ -36,7 +37,7 @@ export default function ButtonAppBar() {
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            <IconButton onClick={()=>{console.log("STATE:",app.state)}} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+            <IconButton onClick={()=>{app.dispatch(unload())}} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
               <LayersIcon />
             </IconButton>
             <Typography variant="h6" className={classes.title}>
@@ -69,7 +70,7 @@ export default function ButtonAppBar() {
                   )
                   :
                   (
-                    <IconButton onClick={()=>{app.dispatch(toggleTheme())}} color="secondary">
+                    <IconButton onClick={()=>{app.dispatch(toggleTheme())}} color="inherit">
 									    <Brightness4Icon />
 								    </IconButton>
                   )

@@ -81,4 +81,11 @@ export const toggleTheme = () => {
     return {
         type: 'TOGGLE_THEME'
     }
-}
+};
+
+export const onSuccess = (result) => {
+    return {
+        type: 'SUCCESS',
+        result: result
+    }
+};

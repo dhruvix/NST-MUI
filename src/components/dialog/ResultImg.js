@@ -40,7 +40,7 @@ export default function ResultImg() {
             )
         }
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleClose} color="secondary">
             Close
           </Button>
         </DialogActions>

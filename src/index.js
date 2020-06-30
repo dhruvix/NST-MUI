@@ -4,9 +4,9 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { createMuiTheme } from '@material-ui/core/styles';
-import { blue,amber,yellow,indigo } from '@material-ui/core/colors';
-//import { light,dark } from '@material-ui/core/styles/createPalette';
+import { blue,red,yellow,indigo } from '@material-ui/core/colors';
 import { ThemeProvider } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import {reducer, INITIAL_STATE} from './global/Reducer';
 
 export const AppContext = React.createContext();
@@ -17,8 +17,8 @@ const RootComponent = () => {
   const lighttheme = createMuiTheme({
     palette: {
       primary: blue,
-      secondary: amber,
-      //type: light,
+      secondary: red,
+      type: "light",
     },
     status: {
       danger: 'orange',
@@ -29,7 +29,7 @@ const RootComponent = () => {
     palette: {
       primary: indigo,
       secondary: yellow,
-      //type: dark,
+      type: "dark",
     },
     status: {
       danger: 'orange',
@@ -39,6 +39,7 @@ const RootComponent = () => {
   return(
     <AppContext.Provider value={{state,dispatch}}>
       <ThemeProvider theme={state.darkMode? darktheme: lighttheme}>
+      <CssBaseline />
         <App />
       </ThemeProvider>
     </AppContext.Provider>

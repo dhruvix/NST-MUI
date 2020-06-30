@@ -7,18 +7,17 @@ import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { submit,unload } from '../../global/Reducer';
+import { submit,onSuccess } from '../../global/Reducer';
 import { Grid } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
         width: '50%',
         margin: theme.spacing(4),
+        marginBottom: theme.spacing(3),
         padding: theme.spacing(3),
     },
     button: {
-        // background: 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)',
-        // boxShadow: '0 3px 5px 2px rgba(33, 203, 243, .3)',
         width: '30%',
         margin: theme.spacing(2),
     },
@@ -39,15 +38,20 @@ export default function TextFields() {
     const [cont, setContent] = useState("");
     const [styl, setStyle] = useState("");
 
-    const handleClose = () => {
-        app.dispatch(unload());
-    };
-
     const handleSubmit = () => {
       app.dispatch(submit(cont,styl));
-      /*
-      Fetch from API, set loading to false, disp to true and resultimg
-      */
+      fetch('<API_URL>', {
+            method: 'post',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                content:app.state.content,
+                style:app.state.style
+            })
+        }).then(data => {
+          app.dispatch(onSuccess(data));
+        }).catch(err => {
+          alert(err);
+        })
     };
 
     const handleC = (event) =>{
@@ -62,19 +66,19 @@ export default function TextFields() {
     <Grid container justify="center">
       <Paper className={classes.paper} elevation={3}>
       <form noValidate autoComplete="off">
-        <TextField className={classes.input} onChange={handleC} label="Content image URL" />
-        <TextField className={classes.input} onChange={handleS} label="Style image URL" />
+        <TextField className={classes.input} onChange={handleC} label="Content image URL" color="secondary"/>
+        <TextField className={classes.input} onChange={handleS} label="Style image URL" color="secondary"/>
         <Button
             className={classes.button}
             variant="contained"
-            color="primary"
+            color="secondary"
             endIcon={<DoubleArrowIcon />}
             onClick={handleSubmit}
             >
             Transfer Style
         </Button>
       </form>
-      <Backdrop className={classes.backdrop} open={app.state.loading} onClick={handleClose}>
+      <Backdrop className={classes.backdrop} open={app.state.loading} >
         <CircularProgress color="secondary" />
       </Backdrop>
     </Paper>
