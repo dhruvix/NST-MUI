@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { AppContext } from '../../App';
+import { AppContext } from '../../index';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -8,6 +8,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import { toggleinst } from '../../global/Reducer';
+import instruction from '../../images/instruction.png';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -33,7 +34,7 @@ export default function Instructions() {
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
             Enter the URL of a content image and a style image. The design of the style image will be transfered to the content image.
-            <img alt="example of NST" src="https://hackernoon.com/hn-images/1*k5Q_NYr1niC-qjWMr-lUCg.png" width="100%" height="auto" />
+            <img alt="example of NST" src={instruction} width="100%" height="auto" />
           </DialogContentText>
         </DialogContent>
         <DialogActions>

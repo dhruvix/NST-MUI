@@ -1,5 +1,5 @@
 import React, { useContext,useState } from 'react';
-import { AppContext } from '../../App';
+import { AppContext } from '../../index';
 import DoubleArrowIcon from '@material-ui/icons/DoubleArrow';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
