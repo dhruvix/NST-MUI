@@ -13,8 +13,7 @@ import { Grid } from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
     paper: {
         width: '50%',
-        margin: theme.spacing(4),
-        marginBottom: theme.spacing(3),
+        margin: theme.spacing(3),
         padding: theme.spacing(3),
     },
     button: {
