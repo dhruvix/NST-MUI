@@ -37,11 +37,17 @@ export default function ButtonAppBar() {
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            <IconButton onClick={()=>{app.dispatch(unload())}} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-              <LayersIcon />
-            </IconButton>
+            <Button
+                    edge="start"  color="inherit" aria-label="menu"
+                    size="large"
+                    className={classes.menuButton}
+                    startIcon={<LayersIcon />}
+                    onClick={()=>{app.dispatch(unload())}}
+                    >
+                    Neural Style Transfer
+            </Button>
             <Typography variant="h6" className={classes.title}>
-              Neural Style Transfer
+                  
             </Typography>
                 <Button
                     variant="contained"
