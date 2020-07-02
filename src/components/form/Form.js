@@ -37,20 +37,21 @@ export default function TextFields() {
     const [cont, setContent] = useState("");
     const [styl, setStyle] = useState("");
 
+    function validateResponse(response) {
+      if (!response.ok) {
+          throw Error(response.statusText);
+      }
+      return response;
+    }
+
     const handleSubmit = () => {
       app.dispatch(submit(cont,styl));
-      fetch('<API_URL>', {
-            method: 'post',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                content:app.state.content,
-                style:app.state.style
-            })
-        }).then(data => {
-          app.dispatch(onSuccess(data));
-        }).catch(err => {
-          alert(err);
-        })
+      fetch(`http://localhost:5000/pic?content=${cont}&style=${styl}`)
+            .then(validateResponse)
+            .then(response => response.blob())
+            .then(blob => {
+                app.dispatch(onSuccess(URL.createObjectURL(blob)));
+            }).catch(err => alert("something's not right:",err));
     };
 
     const handleC = (event) =>{
