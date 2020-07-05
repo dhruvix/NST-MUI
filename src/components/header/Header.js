@@ -11,7 +11,8 @@ import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
 import LayersIcon from '@material-ui/icons/Layers';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import Brightness7Icon from '@material-ui/icons/Brightness7';
-import { toggleinst,toggledisp,toggleTheme,unload } from '../../global/Reducer';
+import InfoIcon from '@material-ui/icons/Info';
+import { toggleinst,toggledisp,toggleTheme,unload,about } from '../../global/Reducer';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,13 +43,22 @@ export default function ButtonAppBar() {
                     size="large"
                     className={classes.menuButton}
                     startIcon={<LayersIcon />}
-                    onClick={()=>{app.dispatch(unload())}}
+                    onClick={()=>{app.dispatch(unload()); console.log(app.state);}}
                     >
                     Neural Style Transfer
             </Button>
             <Typography variant="h6" className={classes.title}>
                   
             </Typography>
+                <Button
+                    variant="contained"
+                    color="secondary"
+                    className={classes.button}
+                    startIcon={<InfoIcon />}
+                    onClick={()=>{app.dispatch(about())}}
+                    >
+                    About
+                </Button>
                 <Button
                     variant="contained"
                     color="secondary"

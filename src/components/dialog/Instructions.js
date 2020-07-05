@@ -34,6 +34,7 @@ export default function Instructions() {
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
             Enter the URL of a content image and a style image. The design of the style image will be transfered to the content image.
+            Make sure the URLs you enter are of JPG images.
             <img alt="example of NST" src={instruction} width="100%" height="auto" />
             When the result image is produced you can see it by clicking the 'see image' button
           </DialogContentText>

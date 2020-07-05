@@ -6,7 +6,8 @@ export const INITIAL_STATE = {
     disp:false,
     loading:false,
     showimgs:false,
-    darkMode:false
+    darkMode:false,
+    about:false
 };
 
 export const reducer = (state,action) => {
@@ -39,6 +40,10 @@ export const reducer = (state,action) => {
         case 'TOGGLE_THEME': return {
             ...state,
             darkMode: !state.darkMode
+        };
+        case 'TOGGLE_ABOUT': return {
+            ...state,
+            about: !state.about
         };
         default: return state;
     }
@@ -87,5 +92,11 @@ export const onSuccess = (result) => {
     return {
         type: 'SUCCESS',
         result: result
+    }
+};
+
+export const about = () => {
+    return {
+        type: 'TOGGLE_ABOUT'
     }
 };

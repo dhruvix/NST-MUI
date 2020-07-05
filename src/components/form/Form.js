@@ -7,7 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { submit,onSuccess } from '../../global/Reducer';
+import { submit,onSuccess,unload } from '../../global/Reducer';
 import { Grid } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -44,14 +44,28 @@ export default function TextFields() {
       return response;
     }
 
+    function validateRequest(request) {
+      let a = request.includes('.jpg') || request.includes('.jpeg');
+      let b = request.includes('http://') || request.includes('https://');
+      return a && b;
+    }
+
     const handleSubmit = () => {
-      app.dispatch(submit(cont,styl));
-      fetch(`http://localhost:5000/pic?content=${cont}&style=${styl}`)
+      if(validateRequest(cont) && validateRequest(styl)){
+        app.dispatch(submit(cont,styl));
+        fetch(`https://nst-hadhru.herokuapp.com/pic?content=${cont}&style=${styl}`)
             .then(validateResponse)
             .then(response => response.blob())
             .then(blob => {
                 app.dispatch(onSuccess(URL.createObjectURL(blob)));
-            }).catch(err => alert("something's not right:",err));
+            }).catch(err => {
+              alert("something's not right: The server could be overloaded or the program might not have been able to take the input properly",err);
+              app.dispatch(unload());
+            });
+      }
+      else{
+        alert("looks like the URLs you have entered are not valid JPG images!")
+      }
     };
 
     const handleC = (event) =>{
